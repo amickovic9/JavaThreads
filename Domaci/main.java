@@ -3,42 +3,33 @@ package Domaci;
 public class main {
     public static void main(String[] args) {
         int[] putarine = {100, 200, 300};
+        Cenovnik osnovniCenovnik = new Cenovnik(putarine);
 
-        Cenovnik cenovnik = new Cenovnik(putarine);
+        Stanica osnovnaStanica = new Stanica(osnovniCenovnik);
 
-        Stanica stanica = new Stanica(cenovnik);
-
-        Vozilo auto = new Vozilo(1);
-        Vozilo kamion = new Vozilo(2);
-        Vozilo autobus = new Vozilo(3);
-        Vozilo pogresnoVozilo = new Vozilo(4);
+        NaplatnaRampa rampa = new NaplatnaRampa("Stari Hrast", 3, osnovnaStanica, 2.0);
+        Cenovnik noviCenovnik = new Cenovnik(new int[]{150, 250, 350});
+        rampa.otvori(noviCenovnik);
 
         try {
-            stanica.naplatiPutarinu(auto);
-            stanica.naplatiPutarinu(kamion);
-            System.out.println(stanica);
-        } catch (Exception e) {
-            System.out.println("Greška: " + e.getMessage());
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+        System.out.println("Nakon 15 sekundi: " + rampa);
+
+        rampa.zatvori();
 
         try {
-            stanica.naplatiPutarinu(pogresnoVozilo);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Greška: " + e.getMessage());
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-        int[] noviPutarine = {120, 220, 320};
-        Cenovnik noviCenovnik = new Cenovnik(noviPutarine);
-        stanica.setCenovnik(noviCenovnik);
+        System.out.println("Stanje nakon zatvaranja: " + rampa);
 
-        try {
-            stanica.naplatiPutarinu(autobus);
-            System.out.println(stanica);
-        } catch (Exception e) {
-            System.out.println("Greška: " + e.getMessage());
-        }
-
-        Stanica kopijaStanice = stanica.kopijaStanice();
-        System.out.println("Kopija stanice: " + kopijaStanice);
+        rampa.unisti();
+        System.out.println("Rampa unistena.");
     }
 }

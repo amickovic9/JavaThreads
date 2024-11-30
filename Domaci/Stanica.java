@@ -34,6 +34,10 @@ public class Stanica {
         naplacenoOdPostavkeCenovnika += this.cenovnik.getPutarina(kategorija);
     }
 
+    public Cenovnik getCenovnik() {
+        return cenovnik;
+    }
+
     @Override
     public String toString() {
         return "Naplacena putarina: " + this.naplacenePutarine + " , id: " + this.id;
